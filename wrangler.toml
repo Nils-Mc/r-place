@@ -1,5 +1,6 @@
 name = "rplace-worker"
-type = "javascript"
+main = "index.js"
+compatibility_date = "2025-11-06"
 
 [[kv_namespaces]]
 binding = "PIXEL_STORE"

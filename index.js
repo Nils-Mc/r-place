@@ -1,4 +1,4 @@
-const COOLDOWN_MS = 60 * 60 * 1000;
+const COOLDOWN_MS =  1000;
 
 export default {
   async fetch(request, env) {

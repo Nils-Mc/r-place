@@ -138,8 +138,8 @@ function renderHTML() {
     const colorPicker = document.getElementById("colorPicker");
     const status = document.getElementById("status");
     
-const GRID_WIDTH = 100;
-const GRID_HIGHT = 100;
+const GRID_WIDTH = 10;
+const GRID_HIGHT = 10;
 
     async function loadGrid() {
       try {

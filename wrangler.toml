@@ -4,7 +4,7 @@ compatibility_date = "2025-11-06"
 
 [[kv_namespaces]]
 binding = "PIXEL_STORE"
-id = "f524cbbcfb5e4ac5bc17025efb0c8cd3"
+id = "956df59351d14609b0b7555dff5bbb10"
 
 [[kv_namespaces]]
 binding = "USER_LOG"

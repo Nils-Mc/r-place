@@ -125,7 +125,7 @@ function renderHTML() {
   </style>
 </head>
 <body>
-  <h1>🎨 r/place mini</h1>
+  <h1>🎨 Platziere deine pixel</h1>
   <div class="controls">
     <label for="colorPicker">Farbe wählen:</label>
     <input type="color" id="colorPicker" value="#ff0000" />
@@ -182,6 +182,7 @@ const GRID_HIGHT = 50;
     loadGrid();
     setInterval(loadGrid, 5000); // Polling alle 5 Sekunden
   </script>
+  <t1>If you experience any errors write an mail to Nils_1132@gmx.de</t1>
 </body>
 </html>
 `;

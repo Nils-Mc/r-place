@@ -1,4 +1,6 @@
 const COOLDOWN_MS = 10; // 1 Stunde
+const GRID_WIDTH = 100;
+const GRID_HIGHT = 100;
 
 export default {
   async fetch(request, env) {
@@ -142,8 +144,8 @@ function renderHTML() {
         const res = await fetch("/state");
         const state = await res.json();
         grid.innerHTML = "";
-        for (let y = 0; y < 50; y++) {
-          for (let x = 0; x < 50; x++) {
+        for (let y = 0; y < GRID_WIDTH; y++) {
+          for (let x = 0; x < GRID_HIGHT; x++) {
             const div = document.createElement("div");
             div.className = "pixel";
             const key = x + "," + y;

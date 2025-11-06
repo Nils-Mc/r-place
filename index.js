@@ -1,4 +1,4 @@
-const COOLDOWN_MS = 60 * 60 * 1000; // 1 Stunde
+const COOLDOWN_MS = 00; // 1 Stunde
 
 export default {
   async fetch(request, env) {

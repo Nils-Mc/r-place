@@ -1,4 +1,4 @@
-const COOLDOWN_MS =  1000;
+const COOLDOWN_MS = 60 * 60 * 1000; // 1 Stunde
 
 export default {
   async fetch(request, env) {
@@ -7,7 +7,7 @@ export default {
     const userId = getUserId(request);
 
     if (request.method === "GET" && path === "/") {
-      return new Response(await renderHTML(), {
+      return new Response(renderHTML(), {
         headers: { "content-type": "text/html" },
       });
     }
@@ -16,7 +16,8 @@ export default {
       const keys = await env.PIXEL_STORE.list();
       const state = {};
       for (const key of keys.keys) {
-        state[key.name] = await env.PIXEL_STORE.get(key.name);
+        const value = await env.PIXEL_STORE.get(key.name);
+        state[key.name] = value;
       }
       return new Response(JSON.stringify(state), {
         headers: { "content-type": "application/json" },
@@ -29,7 +30,8 @@ export default {
       if (!allowed) {
         return new Response("Cooldown active", { status: 403 });
       }
-      await env.PIXEL_STORE.put(`${x},${y}`, color);
+      const key = x + "," + y;
+      await env.PIXEL_STORE.put(key, color);
       await env.USER_LOG.put(userId, Date.now().toString());
       return new Response("OK");
     }
@@ -40,7 +42,7 @@ export default {
 
 function getUserId(request) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-  return `user-${ip}`;
+  return "user-" + ip;
 }
 
 async function canUserPaint(env, userId) {
@@ -63,7 +65,6 @@ function renderHTML() {
       --gap-size: 1px;
       --default-color: #eee;
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -74,25 +75,21 @@ function renderHTML() {
       align-items: center;
       padding: 1rem;
     }
-
     h1 {
       margin-bottom: 0.5rem;
     }
-
     .controls {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
     #colorPicker {
       width: 40px;
       height: 40px;
       border: none;
       cursor: pointer;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(50, var(--pixel-size));
@@ -102,7 +99,6 @@ function renderHTML() {
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     .pixel {
       width: var(--pixel-size);
       height: var(--pixel-size);
@@ -110,18 +106,15 @@ function renderHTML() {
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-
     .pixel:hover {
       transform: scale(1.2);
       outline: 1px solid #999;
     }
-
     #status {
       margin-top: 1rem;
       font-size: 0.9rem;
       color: #666;
     }
-
     @media (max-width: 600px) {
       .grid {
         transform: scale(0.8);
@@ -153,7 +146,7 @@ function renderHTML() {
           for (let x = 0; x < 50; x++) {
             const div = document.createElement("div");
             div.className = "pixel";
-            const key = `${x},${y}`;
+            const key = x + "," + y;
             div.style.background = state[key] || getDefaultColor();
             div.onclick = async () => {
               const color = colorPicker.value;
@@ -187,6 +180,5 @@ function renderHTML() {
   </script>
 </body>
 </html>
-
 `;
 }

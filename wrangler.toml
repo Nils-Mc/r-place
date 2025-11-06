@@ -1,4 +1,4 @@
-name = "rplace-worker"
+name = "pixelpaint"
 main = "index.js"
 compatibility_date = "2025-11-06"
 

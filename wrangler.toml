@@ -1,0 +1,10 @@
+name = "rplace-worker"
+type = "javascript"
+
+[[kv_namespaces]]
+binding = "PIXEL_STORE"
+id = "<deine-kv-id>"
+
+[[kv_namespaces]]
+binding = "USER_LOG"
+id = "<deine-kv-id>"

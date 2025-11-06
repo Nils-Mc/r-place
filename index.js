@@ -1,6 +1,5 @@
 const COOLDOWN_MS = 10; // 1 Stunde
-const GRID_WIDTH = 100;
-const GRID_HIGHT = 100;
+
 
 export default {
   async fetch(request, env) {
@@ -138,6 +137,9 @@ function renderHTML() {
     const grid = document.getElementById("grid");
     const colorPicker = document.getElementById("colorPicker");
     const status = document.getElementById("status");
+    
+const GRID_WIDTH = 100;
+const GRID_HIGHT = 100;
 
     async function loadGrid() {
       try {

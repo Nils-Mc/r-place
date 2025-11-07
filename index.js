@@ -1,4 +1,4 @@
-const COOLDOWN_MS = 60 * 1000; // 1 Minute
+const COOLDOWN_MS = 10; // 1 Minute
 const clients = new Set();
 
 export default {
